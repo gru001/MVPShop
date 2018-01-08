@@ -21,6 +21,8 @@ jobs:
       - run:
           name: Clean
           command: ./gradlew clean
+      # run tests!
+      - run: gradle test
       - run:
           name: Assemble APKs
           command: ./gradlew :app:assembleRelease
