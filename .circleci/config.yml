@@ -22,12 +22,6 @@ jobs:
           name: Clean
           command: ./gradlew clean
       - run:
-          name: Run tests on views module
-          command: ./gradlew :views:testReleaseUnitTest
-      - run:
-          name: Run tests on app module
-          command: ./gradlew :app:testProdReleaseUnitTest
-      - run:
           name: Assemble APKs
           command: ./gradlew :app:assembleRelease
       - save_cache:
