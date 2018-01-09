@@ -8,6 +8,7 @@ ext {
     rulesVersion = '1.0.1'
     espressoVersion = '3.0.1'
     roomVersion = "1.0.0"
+    retrofit = "2.3.0"
 
     libraries = [
             constraint_layout         : 'com.android.support.constraint:constraint-layout:1.0.2',
@@ -29,6 +30,11 @@ ext {
             annotations               : "com.android.support:support-annotations:$supportLibraryVersion",
             room_testing              : "android.arch.persistence.room:testing:$roomVersion",
             espresso_idling_concurrent: "com.android.support.test.espresso.idling:idling-concurrent:$espressoVersion",
-            findbugs                  : "com.google.code.findbugs:jsr305:2.0.1"
+            findbugs                  : "com.google.code.findbugs:jsr305:2.0.1",
+            retrofit_api              : "com.squareup.retrofit2:retrofit:$retrofit",
+            retrofit_gson             : "com.squareup.retrofit2:converter-gson:$retrofit",
+            retrofit_mock             : "com.squareup.retrofit2:retrofit-mock:$retrofit",
+            mock_server               : 'com.squareup.okhttp3:mockwebserver:3.9.1',
+            gson                      : 'com.google.code.gson:gson:2.8.2'
     ]
 }

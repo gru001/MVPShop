@@ -34,6 +34,9 @@ dependencies {
     implementation libraries.room_runtime
     kapt libraries.room_compiler
     implementation libraries.guava
+    implementation libraries.retrofit_api
+    implementation libraries.retrofit_gson
+    implementation libraries.gson
 
     // Dependencies for local unit tests
     testImplementation libraries.junit
@@ -54,6 +57,10 @@ dependencies {
     androidTestImplementation libraries.annotations
     androidTestImplementation libraries.room_testing
     androidTestImplementation libraries.espresso_idling_concurrent
+    androidTestImplementation libraries.retrofit_mock
+    androidTestImplementation libraries.mock_server, {
+        exclude group: 'com.squareup.okhttp3', module: 'okhttp'
+    }
 
     implementation libraries.findbugs
 }
