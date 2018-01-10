@@ -10,6 +10,6 @@ class Tax {
     var name: String? = null
     @SerializedName("value")
     @Expose
-    var value: Int? = null
+    var value: Float? = null
 
 }
