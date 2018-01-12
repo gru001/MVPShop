@@ -6,8 +6,8 @@ import com.example.pranit.mvpshop.BaseView
 /**
  * Created by pranit on 12/1/18.
  */
-interface ShopingContract {
-    interface View : BaseView<ShopingPresenter>{
+interface ShoppingContract {
+    interface View : BaseView<ShoppingPresenter>{
     }
 
     interface Presenter:BasePresenter{
