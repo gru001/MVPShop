@@ -3,6 +3,7 @@ package com.example.pranit.mvpshop
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import com.example.pranit.mvpshop.data.local.ShopDatabase
 import com.example.pranit.mvpshop.data.models.ShopResponse
 import com.example.pranit.mvpshop.network.ShopApiService
 import retrofit2.Call
@@ -19,6 +20,12 @@ class MainActivity : AppCompatActivity() {
         api.enqueue(object : Callback<ShopResponse> {
             override fun onResponse(call: Call<ShopResponse>, response: Response<ShopResponse>) {
                 Log.i(MainActivity::class.java.simpleName, "onResponse "+response.body()?.categories?.size)
+
+                val database = ShopDatabase.getInstance(this@MainActivity)
+
+                for (category in response.body()?.categories!!) {
+                    database.categoryDao().insertTask(category)
+                }
             }
 
             override fun onFailure(call: Call<ShopResponse>, t: Throwable) {

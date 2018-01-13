@@ -10,19 +10,22 @@ import com.example.pranit.mvpshop.data.models.Product
 /**
  * Created by pranit on 12/1/18.
  */
-@Dao interface ProductDao{
+@Dao interface ProductDao {
 
     /**
      * Select all products from Table product
      *
      * @return all tasks.
      */
-    @Query("SELECT * FROM $TABLE_PRODUCT") fun getProducts() : List<Product>
+    @Query("SELECT * FROM $TABLE_PRODUCT")
+    fun getProducts(): List<Product>
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE) fun insertTask(product: Product)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertTask(product: Product)
 
     /**
      * Delete all products.
      */
-    @Query("DELETE FROM $TABLE_PRODUCT") fun deleteProducts()
+    @Query("DELETE FROM $TABLE_PRODUCT")
+    fun deleteProducts()
 }

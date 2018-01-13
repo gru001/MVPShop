@@ -1,8 +1,11 @@
 package com.example.pranit.mvpshop.data.models
 
+import android.arch.persistence.room.Entity
+import com.example.pranit.mvpshop.TABLE_VARIANT
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
+@Entity(tableName = TABLE_VARIANT)
 class Variant {
 
     @SerializedName("id")
