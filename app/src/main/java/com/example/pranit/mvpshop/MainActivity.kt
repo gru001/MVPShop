@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
                 val database = ShopDatabase.getInstance(this@MainActivity)
 
                 for (category in response.body()?.categories!!) {
-                    database.categoryDao().insertTask(category)
+                    database.categoryDao().insertCategory(category)
                 }
             }
 

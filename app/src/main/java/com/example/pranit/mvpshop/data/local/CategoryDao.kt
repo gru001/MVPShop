@@ -22,7 +22,7 @@ import com.example.pranit.mvpshop.data.models.Product
     fun getProducts(): List<Product>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertTask(category: Category)
+    fun insertCategory(category: Category)
 
     /**
      * Delete all products.
