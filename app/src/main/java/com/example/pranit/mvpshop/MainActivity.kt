@@ -23,9 +23,14 @@ class MainActivity : AppCompatActivity() {
 
                 val database = ShopDatabase.getInstance(this@MainActivity)
 
-                for (category in response.body()?.categories!!) {
-                    database.categoryDao().insertTask(category)
-                }
+                Thread {
+                    kotlin.run {
+                        for (category in response.body()?.categories!!) {
+                            database.categoryDao().insertTask(category)
+                        }
+                    }
+                }.start()
+
             }
 
             override fun onFailure(call: Call<ShopResponse>, t: Throwable) {
