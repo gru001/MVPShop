@@ -6,12 +6,12 @@ import android.arch.persistence.room.RoomDatabase
 import android.content.Context
 import com.example.pranit.mvpshop.data.models.Category
 import com.example.pranit.mvpshop.data.models.Product
-import com.example.pranit.mvpshop.data.models.Tax
+import com.example.pranit.mvpshop.data.models.Variant
 
 /**
  * Created by pranit on 12/1/18.
  */
-@Database(entities = arrayOf(Category::class, Product::class, Tax::class), version = 1)
+@Database(entities = arrayOf(Category::class, Product::class, Variant::class), version = 1)
 abstract class ShopDatabase : RoomDatabase() {
     abstract fun categoryDao() : CategoryDao
 

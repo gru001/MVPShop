@@ -10,7 +10,7 @@ import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = TABLE_VARIANT, foreignKeys = arrayOf(ForeignKey(entity = Product::class,
         parentColumns = arrayOf("id"),
-        childColumns = arrayOf("productId"),
+        childColumns = arrayOf("product_id"),
         onDelete = ForeignKey.CASCADE)))
 class Variant {
 
@@ -32,6 +32,6 @@ class Variant {
     var price: Int? = null
 
     @ColumnInfo
-    var productId: Int? = null
+    var product_id: Int? = null
 
 }

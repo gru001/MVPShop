@@ -8,12 +8,19 @@ import com.example.pranit.mvpshop.util.AppExecutors
 /**
  * Created by pranit on 9/1/18.
  */
-class ShopLocalDataSource private constructor(val appExecutors: AppExecutors, val categoryDao: CategoryDao) : ShopDataSource {
+class ShopLocalDataSource private constructor(val appExecutors: AppExecutors, val categoryDao: CategoryDao, val productDao: ProductDao, val variantDao: VariantDao) : ShopDataSource {
 
     override fun saveCategories(categories: List<Category>) {
         appExecutors.diskIO.execute{
             for (category in categories) {
                 categoryDao.insertCategory(category)
+                for (product in category.products!!) {
+                    productDao.insertProduct(product)
+
+                    for (varient in product.variants!!) {
+                        variantDao.insertVarient(varient)
+                    }
+                }
             }
         }
     }
@@ -22,10 +29,10 @@ class ShopLocalDataSource private constructor(val appExecutors: AppExecutors, va
         private var INSTANCE: ShopLocalDataSource? = null
 
         @JvmStatic
-        fun getInstance(appExecutors: AppExecutors, categoryDao: CategoryDao): ShopLocalDataSource {
+        fun getInstance(appExecutors: AppExecutors, categoryDao: CategoryDao, productDao: ProductDao, variantDao: VariantDao): ShopLocalDataSource {
             if (INSTANCE == null) {
                 synchronized(ShopLocalDataSource::javaClass) {
-                    INSTANCE = ShopLocalDataSource(appExecutors, categoryDao)
+                    INSTANCE = ShopLocalDataSource(appExecutors, categoryDao, productDao , variantDao)
                 }
             }
             return INSTANCE!!

@@ -1,14 +1,14 @@
 package com.example.pranit.mvpshop.data.models
 
-import android.arch.persistence.room.ColumnInfo
-import android.arch.persistence.room.Entity
-import android.arch.persistence.room.Ignore
-import android.arch.persistence.room.PrimaryKey
+import android.arch.persistence.room.*
 import com.example.pranit.mvpshop.TABLE_PRODUCT
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-@Entity(tableName = TABLE_PRODUCT)
+@Entity(tableName = TABLE_PRODUCT, foreignKeys = [(ForeignKey(entity = Product::class,
+        parentColumns = arrayOf("id"),
+        childColumns = arrayOf("category_id"),
+        onDelete = ForeignKey.CASCADE))])
 class Product {
 
     @PrimaryKey
@@ -48,5 +48,8 @@ class Product {
     @SerializedName("tax")
     @Expose
     var tax: Tax? = null
+
+    @ColumnInfo
+    var category_id : Int? = null
 
 }

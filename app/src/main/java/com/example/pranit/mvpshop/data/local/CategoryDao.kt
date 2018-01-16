@@ -11,7 +11,7 @@ import com.example.pranit.mvpshop.data.models.Product
 /**
  * Created by pranit on 12/1/18.
  */
-@Dao interface CategoryDao{
+@Dao interface CategoryDao {
 
     /**
      * Select all products from Table product
