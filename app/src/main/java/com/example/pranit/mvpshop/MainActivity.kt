@@ -24,7 +24,12 @@ class MainActivity : AppCompatActivity() {
                 val database = ShopDatabase.getInstance(this@MainActivity)
 
                 for (category in response.body()?.categories!!) {
-                    database.categoryDao().insertCategory(category)
+                    Thread {
+                        kotlin.run {
+                            Log.e(MainActivity::class.java.simpleName, "Insert: ${database.categoryDao().insertCategory(category)}")
+                        }
+                    }.start()
+
                 }
             }
 

@@ -17,8 +17,6 @@ abstract class ShopDatabase : RoomDatabase() {
 
     abstract fun productDao() : ProductDao
 
-    abstract fun taxDao() : TaxDao
-
     abstract fun variantDao() : VariantDao
 
     companion object {
