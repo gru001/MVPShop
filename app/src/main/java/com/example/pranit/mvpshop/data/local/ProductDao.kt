@@ -17,15 +17,34 @@ import com.example.pranit.mvpshop.data.models.Product
      *
      * @return all tasks.
      */
-    @Query("SELECT * FROM $TABLE_PRODUCT")
-    fun getProducts(): List<Product>
+    @Query("SELECT * FROM $TABLE_PRODUCT") fun getProducts(): List<Product>
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertProduct(product: Product)
+    /**
+     * Inserts product data into local database
+     *
+     * @param product data
+     */
+    @Insert(onConflict = OnConflictStrategy.REPLACE) fun insertProduct(product: Product)
 
     /**
      * Delete all products.
      */
-    @Query("DELETE FROM $TABLE_PRODUCT")
-    fun deleteProducts()
+    @Query("DELETE FROM $TABLE_PRODUCT") fun deleteProducts()
+
+    /**
+     * Get product by id
+     *
+     * @return product's id looking into database
+     */
+    @Query("SELECT * FROM $TABLE_PRODUCT WHERE prod_id = :productId")
+    fun getProductById(productId : Int) :Product
+
+    /**
+     * Get products by category Id
+     *
+     * @param categoryId to fetch all products
+     * @return Products by category
+     */
+    @Query("SELECT * FROM $TABLE_PRODUCT WHERE category_id = :categoryId")
+    fun getProductsByCateogryId(categoryId : Int) :List<Product>
 }
