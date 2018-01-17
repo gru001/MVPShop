@@ -1,10 +1,11 @@
 package com.example.pranit.mvpshop.data.models
 
 import android.arch.persistence.room.*
+import com.example.pranit.mvpshop.TABLE_VARIANT
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-@Entity(foreignKeys = [(ForeignKey(entity = Product::class,
+@Entity(tableName = TABLE_VARIANT, foreignKeys = [(ForeignKey(entity = Product::class,
         parentColumns = arrayOf("prod_id"),
         childColumns = arrayOf("product_id"),
         onDelete = ForeignKey.CASCADE))])
