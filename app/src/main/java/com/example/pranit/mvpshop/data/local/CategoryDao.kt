@@ -6,7 +6,6 @@ import android.arch.persistence.room.OnConflictStrategy
 import android.arch.persistence.room.Query
 import com.example.pranit.mvpshop.TABLE_CATEGORY
 import com.example.pranit.mvpshop.data.models.Category
-import com.example.pranit.mvpshop.data.models.Product
 
 /**
  * Created by pranit on 12/1/18.
@@ -14,12 +13,12 @@ import com.example.pranit.mvpshop.data.models.Product
 @Dao interface CategoryDao {
 
     /**
-     * Select all products from Table product
+     * Select all categories from Table product
      *
      * @return all tasks.
      */
     @Query("SELECT * FROM $TABLE_CATEGORY")
-    fun getProducts(): List<Product>
+    fun getCategories(): List<Category>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertCategory(category: Category)
