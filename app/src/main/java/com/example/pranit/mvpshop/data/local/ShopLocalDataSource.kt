@@ -17,8 +17,8 @@ class ShopLocalDataSource private constructor(val appExecutors: AppExecutors, va
                 for (product in category.products!!) {
                     productDao.insertProduct(product)
 
-                    for (varient in product.variants!!) {
-                        variantDao.insertVarient(varient)
+                    for (variant in product.variants!!) {
+                        variantDao.insertVariant(variant)
                     }
                 }
             }
