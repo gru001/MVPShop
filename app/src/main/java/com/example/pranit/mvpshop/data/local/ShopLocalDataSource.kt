@@ -9,6 +9,17 @@ import com.example.pranit.mvpshop.util.AppExecutors
  * Created by pranit on 9/1/18.
  */
 class ShopLocalDataSource private constructor(val appExecutors: AppExecutors, val categoryDao: CategoryDao, val productDao: ProductDao, val variantDao: VariantDao) : ShopDataSource {
+    override fun deleteAllCategories() {
+        appExecutors.diskIO.execute{
+            categoryDao.deleteProducts()
+        }
+    }
+
+    override fun getCategories(callback: ShopDataSource.LoadCategoriesCallback) {
+        appExecutors.diskIO.execute {
+            callback.onCategoriesLoaded(categoryDao.getCategories())
+        }
+    }
 
     override fun saveCategories(categories: List<Category>) {
         appExecutors.diskIO.execute{
