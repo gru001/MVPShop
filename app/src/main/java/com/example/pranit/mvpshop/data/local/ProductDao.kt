@@ -35,8 +35,11 @@ import com.example.pranit.mvpshop.data.models.Product
      * Get product by id
      *
      * @return product's id looking into database
+     *
+     * Kotlin isn't preserving argument name properly have to use arg0
+     * https://stackoverflow.com/a/44212557
      */
-    @Query("SELECT * FROM $TABLE_PRODUCT WHERE prod_id = :productId")
+    @Query("SELECT * FROM $TABLE_PRODUCT WHERE prod_id = :arg0")
     fun getProductById(productId : Int) :Product
 
     /**
@@ -44,7 +47,10 @@ import com.example.pranit.mvpshop.data.models.Product
      *
      * @param categoryId to fetch all products
      * @return Products by category
+     *
+     * Kotlin isn't preserving argument name properly have to use arg0
+     * https://stackoverflow.com/a/44212557
      */
-    @Query("SELECT * FROM $TABLE_PRODUCT WHERE category_id = :categoryId")
+    @Query("SELECT * FROM $TABLE_PRODUCT WHERE category_id = :arg0")
     fun getProductsByCateogryId(categoryId : Int) :List<Product>
 }
