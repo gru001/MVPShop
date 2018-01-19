@@ -7,6 +7,10 @@ import com.example.pranit.mvpshop.data.ShopRepository
  */
 class ShoppingPresenter(val shopRepository: ShopRepository, val shopView: ShoppingContract.View) : ShoppingContract.Presenter {
 
+    init {
+        shopView.presenter = this
+    }
+
     override fun start() {
 
     }
