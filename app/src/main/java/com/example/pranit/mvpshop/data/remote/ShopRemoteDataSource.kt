@@ -13,7 +13,7 @@ import retrofit2.Response
 /**
  * Created by pranit on 9/1/18.
  */
-class ShopRemoteDataSource :ShopDataSource{
+class ShopRemoteDataSource private constructor():ShopDataSource{
     override fun deleteAllCategories() {
 
     }
@@ -34,5 +34,18 @@ class ShopRemoteDataSource :ShopDataSource{
                 Log.e(MainActivity::class.java.simpleName, "onFailure ", t)
             }
         })
+    }
+
+    companion object {
+        private var INSTANCE :ShopRemoteDataSource ?= null
+
+        @JvmStatic fun getInstance() : ShopRemoteDataSource {
+            if(INSTANCE == null) {
+                synchronized(ShopRemoteDataSource::javaClass) {
+                    INSTANCE = ShopRemoteDataSource()
+                }
+            }
+            return INSTANCE!!
+        }
     }
 }

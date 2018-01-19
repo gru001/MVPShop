@@ -18,10 +18,10 @@ class ShopRepository(
     }
 
     var cachIsDirty = false
-    var cachedCategories : ArrayList<Category> = ArrayList()
+    var cachedCategories: ArrayList<Category> = ArrayList()
 
     override fun getCategories(callback: ShopDataSource.LoadCategoriesCallback) {
-        if( cachedCategories.isNotEmpty() && !cachIsDirty) {
+        if (cachedCategories.isNotEmpty() && !cachIsDirty) {
             callback.onCategoriesLoaded(cachedCategories)
             return
         }
@@ -35,7 +35,7 @@ class ShopRepository(
     }
 
     private fun getCategoriesFromRemoteDatabase(callback: ShopDataSource.LoadCategoriesCallback) {
-        shopRemoteDataSource.getCategories(object : ShopDataSource.LoadCategoriesCallback{
+        shopRemoteDataSource.getCategories(object : ShopDataSource.LoadCategoriesCallback {
             override fun onCategoriesLoaded(categories: List<Category>) {
                 refreshCache(categories)
                 refreshLocalDataSource(categories)
@@ -61,6 +61,22 @@ class ShopRepository(
 
     override fun saveCategories(categories: List<Category>) {
         shopLocalDataSource.saveCategories(categories)
+    }
+
+    companion object {
+        private var INSTANCE: ShopRepository? = null
+
+        /**
+         * Returns the single instance of Repository class
+         *
+         * @param shopLocalDataSource the local storage data source
+         *
+         */
+        @JvmStatic
+        fun getInstance(shopLocalDataSource: ShopLocalDataSource,
+                        shopRemoteDataSource: ShopRemoteDataSource): ShopRepository {
+            return INSTANCE ?: ShopRepository(shopLocalDataSource, shopRemoteDataSource).apply { INSTANCE = this }
+        }
     }
 
 }
