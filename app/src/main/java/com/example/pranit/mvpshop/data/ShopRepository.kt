@@ -29,9 +29,8 @@ class ShopRepository(
         if (cachIsDirty) {
             getCategoriesFromRemoteDatabase(callback)
         } else {
-
+            shopLocalDataSource.getCategories(callback)
         }
-        shopRemoteDataSource.getCategories(callback)
     }
 
     private fun getCategoriesFromRemoteDatabase(callback: ShopDataSource.LoadCategoriesCallback) {

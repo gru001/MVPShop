@@ -1,6 +1,8 @@
 package com.example.pranit.mvpshop.shopingwindow
 
+import com.example.pranit.mvpshop.data.ShopDataSource
 import com.example.pranit.mvpshop.data.ShopRepository
+import com.example.pranit.mvpshop.data.models.Category
 
 /**
  * Created by pranit on 12/1/18.
@@ -11,7 +13,23 @@ class ShoppingPresenter(val shopRepository: ShopRepository, val shopView: Shoppi
         shopView.presenter = this
     }
 
-    override fun start() {
+    var fetchDataFromServer = false
 
+    override fun start() {
+        shopRepository.cachIsDirty = fetchDataFromServer
+        loadCategories()
+    }
+
+    private fun loadCategories() {
+        shopRepository.getCategories(object :ShopDataSource.LoadCategoriesCallback{
+            override fun onCategoriesLoaded(categories: List<Category>) {
+
+            }
+
+            override fun onDataNotAvailable() {
+
+            }
+
+        })
     }
 }
