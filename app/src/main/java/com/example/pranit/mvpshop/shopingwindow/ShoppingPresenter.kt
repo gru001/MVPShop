@@ -23,7 +23,7 @@ class ShoppingPresenter(val shopRepository: ShopRepository, val shopView: Shoppi
     private fun loadCategories() {
         shopRepository.getCategories(object :ShopDataSource.LoadCategoriesCallback{
             override fun onCategoriesLoaded(categories: List<Category>) {
-
+                shopView.onCategoriesLoaded(categories)
             }
 
             override fun onDataNotAvailable() {
