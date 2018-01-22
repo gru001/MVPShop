@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import com.example.pranit.mvpshop.R
 import com.example.pranit.mvpshop.data.models.Category
 
@@ -21,10 +22,10 @@ class CategoryAdapter(val categories: ArrayList<Category>) :RecyclerView.Adapter
     }
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
-
+        holder?.txtvCategory?.text = categories[position].name
     }
 
     inner class ViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
-
+        val txtvCategory: TextView = itemView as TextView
     }
 }

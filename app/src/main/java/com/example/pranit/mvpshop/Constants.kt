@@ -10,5 +10,3 @@ const val TABLE_CATEGORY = "category"
 const val TABLE_VARIANT = "variant"
 
 const val TABLE_TAX = "tax"
-
-const val PREF_KEY_DATA_LOADED = "data_loaded"

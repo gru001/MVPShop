@@ -9,7 +9,7 @@ import com.example.pranit.mvpshop.data.models.Category
  */
 interface ShoppingContract {
     interface View : BaseView<ShoppingPresenter>{
-        fun onCategoriesLoaded(categories: List<Category>)
+        fun onCategoriesLoaded(categories: ArrayList<Category>)
     }
 
     interface Presenter:BasePresenter{
