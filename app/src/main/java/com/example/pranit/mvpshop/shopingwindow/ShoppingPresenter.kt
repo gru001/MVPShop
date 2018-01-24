@@ -13,7 +13,7 @@ class ShoppingPresenter(val shopRepository: ShopRepository, val shopView: Shoppi
         shopView.presenter = this
     }
 
-    var fetchDataFromServer = false
+    var fetchDataFromServer = true
 
     override fun start() {
         shopRepository.cachIsDirty = fetchDataFromServer

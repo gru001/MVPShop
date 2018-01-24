@@ -41,6 +41,8 @@ class MainActivity : AppCompatActivity(), ShoppingContract.View{
 
     override fun onCategoriesLoaded(categories: ArrayList<Category>) {
         pref!!.setDataLoaded(true)
-        recyclerView?.adapter = CategoryAdapter(categories)
+        runOnUiThread {
+            recyclerView?.adapter = CategoryAdapter(categories)
+        }
     }
 }

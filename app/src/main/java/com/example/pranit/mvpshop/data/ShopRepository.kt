@@ -21,7 +21,7 @@ class ShopRepository(
     var cachedCategories: ArrayList<Category> = ArrayList()
 
     override fun getCategories(callback: ShopDataSource.LoadCategoriesCallback) {
-        if (cachedCategories.isNotEmpty() && !cachIsDirty) {
+        if (!cachedCategories.isEmpty() && !cachIsDirty) {
             callback.onCategoriesLoaded(cachedCategories)
             return
         }
@@ -50,6 +50,7 @@ class ShopRepository(
 
     private fun refreshLocalDataSource(categories: List<Category>) {
         shopLocalDataSource.deleteAllCategories()
+        saveCategories(categories)
     }
 
     private fun refreshCache(categories: List<Category>) {
