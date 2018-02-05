@@ -42,7 +42,7 @@ dependencies {
     testImplementation libraries.junit
     testImplementation libraries.hamcrest
     testImplementation libraries.mockito
-    testImplementation libraries.mockito_android
+    androidTestImplementation libraries.mockito_android
 
     // Espresso UI Testing
     androidTestImplementation libraries.espresso

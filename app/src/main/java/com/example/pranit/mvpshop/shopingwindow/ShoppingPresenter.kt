@@ -27,9 +27,8 @@ class ShoppingPresenter(val shopRepository: ShopRepository, val shopView: Shoppi
             }
 
             override fun onDataNotAvailable() {
-
+                shopView.onDataFailedToLoad()
             }
-
         })
     }
 }
