@@ -18,7 +18,7 @@ class ShopLocalDataSource private constructor(val appExecutors: AppExecutors, va
 
     override fun getCategories(callback: ShopDataSource.LoadCategoriesCallback) {
         appExecutors.diskIO.execute {
-            callback.onCategoriesLoaded(categoryDao.getCategories())
+//            callback.onCategoriesLoaded(categoryDao.getCategories())
         }
     }
 

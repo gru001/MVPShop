@@ -22,10 +22,10 @@ class ShopRepository(
     var cachedCategories: ArrayList<Category> = ArrayList()
 
     override fun getCategories(callback: ShopDataSource.LoadCategoriesCallback) {
-        if (!cachedCategories.isEmpty() && !cachIsDirty) {
-            callback.onCategoriesLoaded(cachedCategories)
-            return
-        }
+//        if (!cachedCategories.isEmpty() && !cachIsDirty) {
+//            callback.onCategoriesLoaded(cachedCategories)
+//            return
+//        }
 
         if (cachIsDirty) {
             getCategoriesFromRemoteDatabase(callback)
@@ -36,10 +36,10 @@ class ShopRepository(
 
     private fun getCategoriesFromRemoteDatabase(callback: ShopDataSource.LoadCategoriesCallback) {
         shopRemoteDataSource.getCategories(object : ShopDataSource.LoadCategoriesCallback {
-            override fun onCategoriesLoaded(categories: List<Category>) {
-                refreshCache(categories)
-                refreshLocalDataSource(categories)
-                callback.onCategoriesLoaded(categories)
+            override fun onCategoriesLoaded(response: ShopResponse) {
+//                refreshCache(categories)
+                refreshLocalDataSource(response)
+                callback.onCategoriesLoaded(response)
             }
 
             override fun onDataNotAvailable() {
@@ -49,9 +49,9 @@ class ShopRepository(
         })
     }
 
-    private fun refreshLocalDataSource(categories: List<Category>) {
+    private fun refreshLocalDataSource(response: ShopResponse) {
         shopLocalDataSource.deleteAllCategories()
-        saveCategories(categories)
+        saveCategories(response)
     }
 
     private fun refreshCache(categories: List<Category>) {

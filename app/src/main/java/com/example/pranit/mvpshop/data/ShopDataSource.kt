@@ -1,6 +1,5 @@
 package com.example.pranit.mvpshop.data
 
-import com.example.pranit.mvpshop.data.models.Category
 import com.example.pranit.mvpshop.data.models.ShopResponse
 
 /**
@@ -9,7 +8,7 @@ import com.example.pranit.mvpshop.data.models.ShopResponse
 interface ShopDataSource {
 
     interface LoadCategoriesCallback {
-        fun onCategoriesLoaded(categories: List<Category>)
+        fun onCategoriesLoaded(response: ShopResponse)
         fun onDataNotAvailable()
     }
 

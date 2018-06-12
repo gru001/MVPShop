@@ -27,7 +27,7 @@ class ShopRemoteDataSource private constructor():ShopDataSource{
         api.enqueue(object : Callback<ShopResponse> {
             override fun onResponse(call: Call<ShopResponse>, response: Response<ShopResponse>) {
                 Log.i(ShopRemoteDataSource::class.java.simpleName, "onResponse "+response.body()?.categories?.size)
-                callback.onCategoriesLoaded(response.body()?.categories!!)
+                callback.onCategoriesLoaded(response.body()!!)
             }
 
             override fun onFailure(call: Call<ShopResponse>, t: Throwable) {
