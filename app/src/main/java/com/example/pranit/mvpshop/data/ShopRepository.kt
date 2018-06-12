@@ -2,6 +2,7 @@ package com.example.pranit.mvpshop.data
 
 import com.example.pranit.mvpshop.data.local.ShopLocalDataSource
 import com.example.pranit.mvpshop.data.models.Category
+import com.example.pranit.mvpshop.data.models.ShopResponse
 import com.example.pranit.mvpshop.data.remote.ShopRemoteDataSource
 
 /**
@@ -59,8 +60,8 @@ class ShopRepository(
         cachIsDirty = false
     }
 
-    override fun saveCategories(categories: List<Category>) {
-        shopLocalDataSource.saveCategories(categories)
+    override fun saveCategories(response: ShopResponse) {
+        shopLocalDataSource.saveCategories(response)
     }
 
     companion object {

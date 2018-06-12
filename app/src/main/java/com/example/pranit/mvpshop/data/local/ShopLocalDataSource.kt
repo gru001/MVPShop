@@ -2,13 +2,14 @@ package com.example.pranit.mvpshop.data.local
 
 import android.support.annotation.VisibleForTesting
 import com.example.pranit.mvpshop.data.ShopDataSource
-import com.example.pranit.mvpshop.data.models.Category
+import com.example.pranit.mvpshop.data.models.ShopResponse
 import com.example.pranit.mvpshop.util.AppExecutors
 
 /**
  * Created by pranit on 9/1/18.
  */
 class ShopLocalDataSource private constructor(val appExecutors: AppExecutors, val categoryDao: CategoryDao, val productDao: ProductDao, val variantDao: VariantDao) : ShopDataSource {
+
     override fun deleteAllCategories() {
         appExecutors.diskIO.execute{
             categoryDao.deleteProducts()
@@ -21,16 +22,23 @@ class ShopLocalDataSource private constructor(val appExecutors: AppExecutors, va
         }
     }
 
-    override fun saveCategories(categories: List<Category>) {
+    override fun saveCategories(response: ShopResponse) {
         appExecutors.diskIO.execute{
-            for (category in categories) {
+            for (category in response.categories!!) {
                 categoryDao.insertCategory(category)
                 for (product in category.products!!) {
+                    product.category_id = category.id
                     productDao.insertProduct(product)
-
                     for (variant in product.variants!!) {
+                        variant.product_id = product.prod_id
                         variantDao.insertVariant(variant)
                     }
+                }
+            }
+
+            for(ranking in response.rankings!!) {
+                for (product in ranking.products) {
+                    productDao.updateRanking(product.viewCount!!, product.orderCount!!, product.shares!!, product.id!!)
                 }
             }
         }

@@ -3,7 +3,6 @@ package com.example.pranit.mvpshop.data.remote
 import android.util.Log
 import com.example.pranit.mvpshop.MainActivity
 import com.example.pranit.mvpshop.data.ShopDataSource
-import com.example.pranit.mvpshop.data.models.Category
 import com.example.pranit.mvpshop.data.models.ShopResponse
 import com.example.pranit.mvpshop.network.ShopApiService
 import retrofit2.Call
@@ -14,11 +13,12 @@ import retrofit2.Response
  * Created by pranit on 9/1/18.
  */
 class ShopRemoteDataSource private constructor():ShopDataSource{
+
     override fun deleteAllCategories() {
 
     }
 
-    override fun saveCategories(categories: List<Category>) {
+    override fun saveCategories(response: ShopResponse) {
 
     }
 
