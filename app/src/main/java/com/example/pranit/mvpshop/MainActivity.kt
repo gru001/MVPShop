@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity(), ShoppingContract.View {
 
         recyclerView = findViewById(R.id.recy_category)
         recyclerView?.layoutManager = LinearLayoutManager(this)
+        recyclerView?.hasFixedSize()
 
         presenter = ShoppingPresenter(Injection.provideTasksRepository(this), this)
 
