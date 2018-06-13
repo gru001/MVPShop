@@ -1,7 +1,6 @@
 package com.example.pranit.mvpshop.data
 
 import com.example.pranit.mvpshop.data.local.ShopLocalDataSource
-import com.example.pranit.mvpshop.data.models.Category
 import com.example.pranit.mvpshop.data.models.ShopResponse
 import com.example.pranit.mvpshop.data.remote.ShopRemoteDataSource
 
@@ -15,17 +14,17 @@ class ShopRepository(
     override fun deleteAllCategories() {
         shopLocalDataSource.deleteAllCategories()
         shopRemoteDataSource.deleteAllCategories()
-        cachedCategories.clear()
+        cachedResponse = null
     }
 
-    var cachIsDirty = false
-    var cachedCategories: ArrayList<Category> = ArrayList()
+    var cachIsDirty = true
+    var cachedResponse: ShopResponse ?= null
 
     override fun getCategories(callback: ShopDataSource.LoadCategoriesCallback) {
-//        if (!cachedCategories.isEmpty() && !cachIsDirty) {
-//            callback.onCategoriesLoaded(cachedCategories)
-//            return
-//        }
+        if (cachedResponse != null) {
+            callback.onCategoriesLoaded(cachedResponse)
+            return
+        }
 
         if (cachIsDirty) {
             getCategoriesFromRemoteDatabase(callback)
@@ -36,9 +35,11 @@ class ShopRepository(
 
     private fun getCategoriesFromRemoteDatabase(callback: ShopDataSource.LoadCategoriesCallback) {
         shopRemoteDataSource.getCategories(object : ShopDataSource.LoadCategoriesCallback {
-            override fun onCategoriesLoaded(response: ShopResponse) {
-//                refreshCache(categories)
-                refreshLocalDataSource(response)
+            override fun onCategoriesLoaded(response: ShopResponse?) {
+                if (response != null) {
+                    refreshCache(response)
+                    refreshLocalDataSource(response)
+                }
                 callback.onCategoriesLoaded(response)
             }
 
@@ -54,9 +55,9 @@ class ShopRepository(
         saveCategories(response)
     }
 
-    private fun refreshCache(categories: List<Category>) {
-        cachedCategories.clear()
-        cachedCategories.addAll(categories)
+    private fun refreshCache(cachedResponse : ShopResponse) {
+        this.cachedResponse = null
+        this.cachedResponse = cachedResponse
         cachIsDirty = false
     }
 

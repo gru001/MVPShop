@@ -18,7 +18,9 @@ class ShopLocalDataSource private constructor(val appExecutors: AppExecutors, va
 
     override fun getCategories(callback: ShopDataSource.LoadCategoriesCallback) {
         appExecutors.diskIO.execute {
-//            callback.onCategoriesLoaded(categoryDao.getCategories())
+            val shopResponse: ShopResponse = ShopResponse()
+            shopResponse.categories = categoryDao.getCategories()
+            callback.onCategoriesLoaded(shopResponse)
         }
     }
 
@@ -38,7 +40,7 @@ class ShopLocalDataSource private constructor(val appExecutors: AppExecutors, va
 
             for(ranking in response.rankings!!) {
                 for (product in ranking.products) {
-                    productDao.updateRanking(product.viewCount!!, product.orderCount!!, product.shares!!, product.id!!)
+                    productDao.updateRanking(product?.viewCount, product?.orderCount, product?.shares, product?.id)
                 }
             }
         }

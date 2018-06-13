@@ -42,8 +42,8 @@ import com.example.pranit.mvpshop.data.models.Product
     @Query("SELECT * FROM $TABLE_PRODUCT WHERE prod_id = :arg0")
     fun getProductById(productId : Int) :Product
 
-    @Query("UPDATE $TABLE_PRODUCT SET viewCount= :viewCount, orderCount= :orderCount, shares=: shares WHERE prod_id= :prodId")
-    fun updateRanking(viewCount:Int, orderCount:Int, shares:Int, prodId:Int)
+    @Query("UPDATE $TABLE_PRODUCT SET viewCount= :arg0, orderCount= :arg1, shares= :arg2 WHERE prod_id= :arg3")
+    fun updateRanking(viewCount: Int?, orderCount:Int?, shares:Int?, prodId:Int?)
 
     /**
      * Get products by category Id
