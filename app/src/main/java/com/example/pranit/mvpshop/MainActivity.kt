@@ -7,11 +7,15 @@ import android.support.v7.widget.RecyclerView
 import android.widget.Toast
 import com.example.pranit.mvpshop.data.models.Category
 import com.example.pranit.mvpshop.helper.PreferenceHelper
+import com.example.pranit.mvpshop.product.ProductActivity
 import com.example.pranit.mvpshop.shopingwindow.CategoryAdapter
 import com.example.pranit.mvpshop.shopingwindow.ShoppingContract
 import com.example.pranit.mvpshop.shopingwindow.ShoppingPresenter
 
-class MainActivity : AppCompatActivity(), ShoppingContract.View {
+class MainActivity : AppCompatActivity(), ShoppingContract.View,  CategoryAdapter.OnCategoryClickListener{
+    override fun onCategoryClick(item: Category?) {
+        startActivity(item?.id?.let { ProductActivity.getStartIntent(this, it) })
+    }
 
     override lateinit var presenter: ShoppingPresenter
     var pref: PreferenceHelper? = null
@@ -48,7 +52,7 @@ class MainActivity : AppCompatActivity(), ShoppingContract.View {
     override fun onCategoriesLoaded(categories: ArrayList<Category>) {
         pref!!.setDataLoaded(true)
         runOnUiThread {
-            recyclerView?.adapter = CategoryAdapter(categories)
+            recyclerView?.adapter = CategoryAdapter(this,categories)
         }
     }
 }

@@ -4,6 +4,7 @@ import android.content.Context
 import com.example.pranit.mvpshop.data.ShopRepository
 import com.example.pranit.mvpshop.data.local.ShopDatabase
 import com.example.pranit.mvpshop.data.local.ShopLocalDataSource
+import com.example.pranit.mvpshop.data.product.ProductLocalDataSource
 import com.example.pranit.mvpshop.data.remote.ShopRemoteDataSource
 import com.example.pranit.mvpshop.util.AppExecutors
 
@@ -15,5 +16,10 @@ object Injection {
         val database = ShopDatabase.getInstance(context)
         return ShopRepository.getInstance(ShopLocalDataSource.getInstance(AppExecutors(),
                 database.categoryDao(), database.productDao(), database.variantDao()), ShopRemoteDataSource.getInstance())
+    }
+
+    fun provideProductRepository(context: Context) :ProductLocalDataSource {
+        val database = ShopDatabase.getInstance(context)
+        return ProductLocalDataSource.getInstance(AppExecutors(), database.productDao())
     }
 }

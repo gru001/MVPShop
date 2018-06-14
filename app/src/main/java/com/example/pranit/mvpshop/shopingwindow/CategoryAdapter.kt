@@ -11,7 +11,7 @@ import com.example.pranit.mvpshop.data.models.Category
 /**
  * Created by pranit on 19/1/18.
  */
-class CategoryAdapter(val categories: ArrayList<Category>) :RecyclerView.Adapter<CategoryAdapter.ViewHolder>(){
+class CategoryAdapter(val listener: OnCategoryClickListener,val categories: ArrayList<Category>) :RecyclerView.Adapter<CategoryAdapter.ViewHolder>(){
     override fun getItemCount(): Int {
         return categories.size
     }
@@ -23,9 +23,21 @@ class CategoryAdapter(val categories: ArrayList<Category>) :RecyclerView.Adapter
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
         holder?.txtvCategory?.text = categories[position].name
+        holder?.bind(categories.get(position), listener)
     }
 
-    inner class ViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
+    class ViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
         val txtvCategory: TextView = itemView as TextView
+
+        fun bind(item: Category, listener: OnCategoryClickListener) {
+            txtvCategory.setOnClickListener{
+                listener.onCategoryClick(item)
+            }
+        }
+
+    }
+
+    interface OnCategoryClickListener {
+        fun onCategoryClick(item: Category?)
     }
 }
