@@ -20,6 +20,10 @@ import com.example.pranit.mvpshop.data.models.Category
     @Query("SELECT * FROM $TABLE_CATEGORY")
     fun getCategories(): List<Category>
 
+    @Query("SELECT * FROM $TABLE_CATEGORY WHERE name = :arg0")
+    fun findCategoriesByName(categoryName: String): List<Category>
+
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertCategory(category: Category)
 

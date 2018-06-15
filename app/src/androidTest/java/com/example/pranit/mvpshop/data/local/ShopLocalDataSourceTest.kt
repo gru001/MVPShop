@@ -4,7 +4,7 @@ import android.arch.persistence.room.Room
 import android.support.test.InstrumentationRegistry
 import android.support.test.filters.LargeTest
 import android.support.test.runner.AndroidJUnit4
-import com.example.pranit.mvpshop.data.models.Category
+import com.example.pranit.mvpshop.data.models.*
 import com.example.pranit.mvpshop.util.SingleExecutors
 import org.junit.After
 import org.junit.Before
@@ -26,7 +26,7 @@ import org.junit.runner.RunWith
                 .build()
 
         ShopLocalDataSource.clearInstance()
-        localDataSource = ShopLocalDataSource.getInstance(SingleExecutors(), database.categoryDao())
+        localDataSource = ShopLocalDataSource.getInstance(SingleExecutors(), database.categoryDao(), database.productDao(), database.variantDao())
     }
 
     @After
@@ -39,10 +39,22 @@ import org.junit.runner.RunWith
         val category = Category()
         category.id = 1
         category.name = "jeans"
+        category.products = listOf(Product()
+                .apply { category_id = 1
+         prod_id = 10
+                variants = listOf(Variant().apply { id = 1
+                product_id = 10
+                prod_id = 10})})
         val categories = listOf(category)
+        val shopResponse = ShopResponse()
+        shopResponse.categories = categories
 
+        val ranking = Ranking()
+        ranking.ranking = "Most Viewed"
+        ranking.products = listOf(Product_().apply { id = 100 })
+        shopResponse.rankings = listOf(ranking)
         with(localDataSource) {
-            saveCategories(categories)
+            saveCategories(shopResponse)
         }
     }
 }
