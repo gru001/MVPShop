@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="ranking_array">
+        <item>Select Ranking</item>
+        <item>Most Viewed Product</item>
+        <item>Most Ordered Product</item>
+        <item>Most Shared Product</item>
+    </string-array>
+</resources>

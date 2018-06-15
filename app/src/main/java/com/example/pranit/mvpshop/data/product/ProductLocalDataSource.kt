@@ -20,6 +20,28 @@ class ProductLocalDataSource private constructor(val appExecutors: AppExecutors,
         }
     }
 
+    fun getProductMostViewed(categoryId: Int, callback: LoadProductsCallback) {
+        appExecutors.diskIO.execute{
+            Log.i(ProductLocalDataSource::class.java.name, "${productDao.getProductsByCateogryId(categoryId)?.size}")
+            callback.onProductLoaded(productDao.getMostViewdProduct(categoryId))
+        }
+    }
+
+    fun getProductMostShared(categoryId: Int, callback: LoadProductsCallback) {
+        appExecutors.diskIO.execute{
+            Log.i(ProductLocalDataSource::class.java.name, "${productDao.getProductsByCateogryId(categoryId)?.size}")
+            callback.onProductLoaded(productDao.getMostSharedProduct(categoryId))
+        }
+    }
+
+    fun getProductMostOrdered(categoryId: Int, callback: LoadProductsCallback) {
+        appExecutors.diskIO.execute{
+            Log.i(ProductLocalDataSource::class.java.name, "${productDao.getProductsByCateogryId(categoryId)?.size}")
+            callback.onProductLoaded(productDao.getMostOrderedProduct(categoryId))
+        }
+    }
+
+
     companion object {
         private var INSTANCE : ProductLocalDataSource? = null
 

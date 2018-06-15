@@ -19,6 +19,16 @@ import com.example.pranit.mvpshop.data.models.Product
      */
     @Query("SELECT * FROM $TABLE_PRODUCT") fun getProducts(): List<Product>
 
+
+    @Query("SELECT * FROM $TABLE_PRODUCT WHERE (category_id = :arg0 AND viewCount IS NOT NULL)")
+    fun getMostViewdProduct(categoryId: Int):List<Product>
+
+    @Query("SELECT * FROM $TABLE_PRODUCT WHERE (category_id = :arg0 AND shares IS NOT NULL)")
+    fun getMostSharedProduct(categoryId: Int):List<Product>
+
+    @Query("SELECT * FROM $TABLE_PRODUCT WHERE (category_id = :arg0 AND orderCount IS NOT NULL)")
+    fun getMostOrderedProduct(categoryId: Int):List<Product>
+
     /**
      * Inserts product data into local database
      *
