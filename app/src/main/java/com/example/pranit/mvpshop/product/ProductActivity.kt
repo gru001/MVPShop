@@ -36,7 +36,8 @@ class ProductActivity :AppCompatActivity(), ProductContract.ProductView{
 
     override fun onResume() {
         super.onResume()
-        presenter.loadProducts(object : ProductLocalDataSource.LoadProductsCallback{
+        val categoryId = intent.getIntExtra(ProductActivity.ARG_CATEGORY_ID, 0)
+        presenter.loadProducts(categoryId, object : ProductLocalDataSource.LoadProductsCallback{
             override fun onProductLoaded(productList: List<Product>?) {
                 recyclerView?.adapter = ProductAdapter(productList as ArrayList<Product>)
             }

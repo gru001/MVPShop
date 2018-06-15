@@ -13,8 +13,8 @@ class ProductPresenter(val dataSource: ProductLocalDataSource, val productView: 
     }
 
 
-    fun loadProducts(callback: ProductLocalDataSource.LoadProductsCallback) {
-        dataSource.getProductByCategory(1, object :ProductLocalDataSource.LoadProductsCallback{
+    fun loadProducts(categoryId: Int, callback: ProductLocalDataSource.LoadProductsCallback) {
+        dataSource.getProductByCategory(categoryId, object :ProductLocalDataSource.LoadProductsCallback{
             override fun onProductLoaded(productList: List<Product>?) {
                 callback.onProductLoaded(productList)
             }
