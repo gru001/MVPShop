@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.view.View
+import android.widget.ProgressBar
 import android.widget.Toast
 import com.example.pranit.mvpshop.data.models.Category
 import com.example.pranit.mvpshop.helper.PreferenceHelper
@@ -20,10 +22,13 @@ class MainActivity : AppCompatActivity(), ShoppingContract.View,  CategoryAdapte
     override lateinit var presenter: ShoppingPresenter
     var pref: PreferenceHelper? = null
     var recyclerView: RecyclerView? = null
+    var prgbCategory : ProgressBar? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        prgbCategory = findViewById(R.id.prgb_category)
 
         recyclerView = findViewById(R.id.recy_category)
         recyclerView?.layoutManager = LinearLayoutManager(this)
@@ -46,12 +51,14 @@ class MainActivity : AppCompatActivity(), ShoppingContract.View,  CategoryAdapte
     }
 
     override fun onDataFailedToLoad() {
+        prgbCategory?.visibility = View.GONE
         Toast.makeText(this, "Failed to load data.", Toast.LENGTH_SHORT).show()
     }
 
     override fun onCategoriesLoaded(categories: ArrayList<Category>) {
         pref!!.setDataLoaded(true)
         runOnUiThread {
+            prgbCategory?.visibility = View.GONE
             recyclerView?.adapter = CategoryAdapter(this,categories)
         }
     }
